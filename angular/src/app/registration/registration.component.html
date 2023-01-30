@@ -1,0 +1,68 @@
+<div class="infinity-container">
+  <!-- FORM CONTAINER BEGIN -->
+  <div class="infinity-form-block">
+    <div class="infinity-click-box text-center">Login into your account</div>
+
+    <div class="infinity-fold">
+      <div class="infinity-form">
+        <form class="form-box" id="form" action="#">
+          <!-- Input Box -->
+          <p *ngIf="isValid('name')" class="error">*name is required</p>
+          <div class="form-input">
+            <span><i class="fa fa-user"></i></span>
+            <input type="text" name="fullname" placeholder="Full Name" formControlName="name" tabindex="10" required />
+          </div>
+          <p *ngIf="isValid('email')" class="error">*email is required</p>
+          <div class="form-input">
+            <span><i class="fa fa-envelope"></i></span>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email Address"
+              formControlName="email"
+              tabindex="10"
+              required
+            />
+          </div>
+          <p *ngIf="isValid('password')" class="error">*password is required</p>
+          <div class="form-input">
+            <span><i class="fa fa-lock"></i></span>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              formControlName="password"
+              required
+            />
+          </div>
+
+          <p *ngIf="isValid('confirmPassword')" class="error">*password is required</p>
+          <div class="form-input">
+            <span><i class="fa fa-lock"></i></span>
+            <input
+              type="password"
+              name="password"
+              id="conformPassword"
+              formControlName="conformPassword"
+              placeholder="ConfirmPassword"
+              required
+            />
+          </div>
+          <div></div>
+          <!-- Register Button -->
+          <div class="col-12 px-0 text-right">
+            <button type="submit" class="btn mb-3">Register</button>
+          </div>
+
+          <div class="text-center">
+            Already have an account?
+            <a class="login-link" routerLinkActive="router-link-active">Login here</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- FORM CONTAINER END -->
+</div>

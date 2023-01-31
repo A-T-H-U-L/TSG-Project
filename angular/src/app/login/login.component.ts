@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 loginError:boolean = false;
 
   constructor(
-    private _router:Router,private _myservice:AuthServiceService,private _activatedRouter:ActivatedRoute
+    private _router:Router,private _activatedRouter:ActivatedRoute
    
    
 

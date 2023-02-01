@@ -20,21 +20,46 @@ export class LoginComponent implements OnInit {
   // error: string | undefined;
   // loginForm!: FormGroup;
   // isLoading = false;
+  loginError: boolean = false;
+  isLoading: boolean = false;
   loginForm!: FormGroup;
-loginError:boolean = false;
-
   constructor(
-    private _router:Router,private _activatedRouter:ActivatedRoute
-   
-   
-
-  
+    private _router: Router,
+    private _activatedRouter: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private _formBuilder :FormBuilder
   ) {
-    // this.createForm();
+    this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
 
+  }
+
+  login() {
+    if (this.loginForm.valid) {
+      console.log(this.loginForm.value);
+      this.isLoading = true;
+      this.authenticationService
+        .login(this.loginForm.value)
+        .pipe(
+          finalize(() => {
+            this.loginForm.markAsPristine();
+            this.isLoading = false;
+          }),
+          untilDestroyed(this)
+        )
+        .subscribe((credentials) => {
+          log.debug(`${credentials} successfully logged in`);
+          console.log("credentials"+credentials)
+          // this._router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
+        
+        
+        
+        });
+    }
+    console.log('aaaa');
+  }
   // login() {
   //   this.isLoading = true;
   //   const login$ = this.authenticationService.login(this.loginForm.value);
@@ -58,11 +83,11 @@ loginError:boolean = false;
   //     );
   // }
 
-  // private createForm() {
-  //   this.loginForm = this.formBuilder.group({
-  //     username: ['', Validators.required],
-  //     password: ['', Validators.required],
-  //     remember: true,
-  //   });
-  // }
+  private createForm() {
+    this.loginForm = this._formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      remember: true,
+    });
+  }
 }

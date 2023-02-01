@@ -80,7 +80,7 @@
 
     <div class="infinity-fold">
       <div class="infinity-form">
-        <form class="form-box" id="form" [formGroup]="loginForm">
+        <form (ngSubmit)="login()" class="form-box" id="form" [formGroup]="loginForm">
           <!-- Input Box -->
           <p id="errorMessage" style="color: red">Wrong password or username</p>
           <p class="error">*email is required</p>
@@ -93,13 +93,14 @@
               placeholder="Email Address"
               tabindex="10"
               id="email"
+              autocomplete="email"
               required
             />
           </div>
           <p class="error">*password is required</p>
           <div class="form-input">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" name="" placeholder="Password" id="password" formControlName="password" required />
+            <input type="password" name="" placeholder="Password" id="password" formControlName="password"  required />
           </div>
           <div class="row mb-2">
             <!--Remember Checkbox -->

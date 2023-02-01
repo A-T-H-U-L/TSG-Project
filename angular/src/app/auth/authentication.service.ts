@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -17,22 +18,31 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private credentialsService: CredentialsService) {}
+  constructor(private credentialsService: CredentialsService,private http:HttpClient) {}
 
   /**
    * Authenticates the user.
    * @param context The login parameters.
    * @return The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      username: context.username,
-      token: '123456',
-    };
-    this.credentialsService.setCredentials(data, context.remember);
-    return of(data);
-  }
+
+  
+
+
+login(body:any){
+  return this.http.post('http://localhost:3000/auth/login',body,{
+    observe:'body'
+  })
+}
+  // login(context: LoginContext): Observable<Credentials> {
+  //   // Replace by proper authentication call
+  //   const data = {
+  //     username: context.username,
+  //     token: '123456',
+  //   };
+  //   this.credentialsService.setCredentials(data, context.remember);
+  //   return of(data);
+  // }
 
   /**
    * Logs out the user and clear credentials.

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { User } = require('../../db/models');
 const JwtService = require('./jwt.service');
-const mysql = require("mysql");
+const db = require('../../db/db.js');
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 
 const AuthService = {
@@ -15,51 +15,17 @@ const AuthService = {
    */
 
   doLogin: async (requestBody) => {
-    const { phone, password } = requestBody;
-    // const user = await User.findOne({
-    //   where: {
-    //     phone
-    //   }
-    // });
-    console.log("aaa")
-
-    const connection = mysql.createConnection({
-
-      host: 'localhost',
-      user: 'root',
-  
-     /* password: 'password',*/
-      database: 'taxmanager'
-  
-  });
-
-
-  connection.connect((err) => {
-
-    if (err) {
-
-        return console.error('error: ' + err.message);
-
-    }
-
- 
-
-    console.log('Connected to the MySQL server.');
-
-});
-
-
-    if (!user) {
-      throw new NotFoundError('User not found');
-    }
-    const isValidPass = bcrypt.compareSync(password, user.password);
-    if (!isValidPass) {
+    const { email, password } = requestBody;
+    let queryObj = `select * from user_account where email = '${email}' and  password = '${password}';`;
+    const resultObj = await db.promise(queryObj);
+    if (!resultObj) {
       throw new BadRequestError('Username or Password is invalid!');
     }
 
-    const payload = {
-      userId: user.id,
-      role: user.role
+    payload = {
+      userId: resultObj[0].userId,
+      role: 'user',
+      email: resultObj[0].email
     };
 
     const accessToken = await JwtService.generateJWT({
@@ -69,7 +35,7 @@ const AuthService = {
       accessToken,
       ...payload
     };
-  }
+  },
 };
 
 module.exports = AuthService;

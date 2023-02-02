@@ -20,6 +20,21 @@ const validateLogin = (httpRequest) => {
   return schema.validate(httpRequest.body, options);
 };
 
+const validateRegistration = (httpRequest) => {
+  const schema = Joi.object({
+    email: Joi.string()
+    .pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+      // .required()
+      .messages({
+        'string.pattern.base': 'Provide valid email!'
+      }),
+    password: Joi.string().min(7).alphanum()
+  });
+  return schema.validate(httpRequest.body, options);
+};
+
+
 module.exports = {
-  validateLogin
+  validateLogin,
+  validateRegistration
 };

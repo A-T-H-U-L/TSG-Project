@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of,map} from 'rxjs';
 
 import { Credentials, CredentialsService } from './credentials.service';
 
 export interface LoginContext {
   username: string;
   password: string;
-  remember?: boolean;
+  // remember?: boolean;
 }
 
 /**
@@ -26,23 +26,13 @@ export class AuthenticationService {
    * @return The user credentials.
    */
 
-  
-
-
-login(body:any){
-  return this.http.post('http://localhost:3000/auth/login',body,{
-    observe:'body'
-  })
-}
-  // login(context: LoginContext): Observable<Credentials> {
-  //   // Replace by proper authentication call
-  //   const data = {
-  //     username: context.username,
-  //     token: '123456',
-  //   };
-  //   this.credentialsService.setCredentials(data, context.remember);
-  //   return of(data);
-  // }
+  login(requestObj: LoginContext): Observable<any> {
+    return this.http.post('/auth/login', requestObj, { observe: "response" }).pipe(
+      map((res: HttpResponse<any>) => {
+        return res.body;
+      })
+    );
+  }
 
   /**
    * Logs out the user and clear credentials.

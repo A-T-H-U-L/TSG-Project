@@ -4,7 +4,7 @@
   "description": "Backend APIs for NITTI",
   "main": "./src/server.js",
   "scripts": {
-    "test": "NODE_CONFIG_DIR=./src/config vitest --run --reporter verbose",
+    "test": "vitest --run --reporter verbose",
     "coverage": "vitest run --coverage",
     "start": "nodemon -L ./src/server.js",
     "lint": "./node_modules/.bin/eslint .",
@@ -55,7 +55,7 @@
     "prettier": "^2.6.2",
     "sequelize-cli": "^6.4.1",
     "sinon": "^14.0.0",
-    "vitest": "^0.12.6",
+    "vitest": "^0.12.10",
     "yargs": "^17.5.0"
   }
 }

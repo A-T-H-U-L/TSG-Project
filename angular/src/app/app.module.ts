@@ -18,6 +18,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 
+
+import { HttpServiceWrapper} from "@shared/http-service/http-service";
 @NgModule({
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
       provide: RouteReuseStrategy,
       useClass: RouteReusableStrategy,
     },
+    HttpServiceWrapper
   ],
   bootstrap: [AppComponent],
 })

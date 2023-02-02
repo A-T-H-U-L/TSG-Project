@@ -10,7 +10,7 @@ export class MockCredentialsService {
     return !!this.credentials;
   }
 
-  setCredentials(credentials?: Credentials, _remember?: boolean) {
+  setCredentials(credentials?: Credentials) {
     this.credentials = credentials || null;
   }
 }

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   error: string | undefined;
   // loginForm!: FormGroup;
   // isLoading = false;
+  errTrue:boolean=false;
   loginError: boolean = false;
   isLoading: boolean = false;
   loginForm!: FormGroup;
@@ -70,10 +71,15 @@ export class LoginComponent implements OnInit {
       console.log('this.loginForm.valid', this.loginForm.value);
       this.authenticationService.login(this.loginForm.value).subscribe(
         (response) => {
+        
           this.isLoading = false;
           console.log('response', response);
+          this._credentialService.setCredentials(response)
+          this._router.navigate(['/home']);
         },
         (error) => {
+          this.isLoading = false;
+          this.errTrue = true
           console.log('response', error);
         }
       );

@@ -79,12 +79,13 @@
     <div class="infinity-click-box text-center">Login into your account</div>
 
     <div class="infinity-fold">
+
       <div class="infinity-form">
         <form (ngSubmit)="login()" class="form-box" id="form" [formGroup]="loginForm" novalidate>
-          <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
+          <!-- <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
             Username or password incorrect.
-          </div>
-
+          </div> -->
+ <small id="errorMessage" [hidden]="!errTrue || isLoading" style="color: red;">Wrong password or username</small>
           <!-- Input Box -->
           <!-- <p id="errorMessage" style="color: red">Wrong password or username</p> -->
           <!-- <p class="error">*email is required</p> -->

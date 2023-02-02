@@ -40,7 +40,7 @@ export class AuthenticationService {
    */
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
-    this.credentialsService.setCredentials();
+    this.credentialsService.clearCredentila();
     return of(true);
   }
 }

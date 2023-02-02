@@ -6,7 +6,7 @@ export interface Credentials {
   token: string;
 }
 
-const credentialsKey = 'credentials';
+const credentialsKey = '_app_cache';
 
 /**
  * Provides storage for authentication credentials.
@@ -48,15 +48,18 @@ export class CredentialsService {
    * @param credentials The user credentials.
    * @param remember True to remember credentials across sessions.
    */
-  setCredentials(credentials?: Credentials) {
-    this._credentials = credentials || null;
-
-    if (credentials) {
+  clearCredentila(){
+    this._credentials = null;
+    sessionStorage.removeItem(credentialsKey);
+  }
+  setCredentials(credentialObj:any) {
+    if (credentialObj) {
       // const storage = remember ? localStorage : sessionStorage;
-      localStorage.setItem(credentialsKey, JSON.stringify(credentials));
+      this._credentials = credentialObj.data.accessToken;
+    sessionStorage.setItem(credentialsKey, JSON.stringify(credentialObj.data.accessToken));
     } else {
+      this._credentials = null;
       sessionStorage.removeItem(credentialsKey);
-      localStorage.removeItem(credentialsKey);
     }
   }
 }

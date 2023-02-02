@@ -5,6 +5,7 @@ const db = require('../../db/db.js');
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 
 const AuthService = {
+  
   /**
    * Login a user and generate token.
    * @async
@@ -18,7 +19,19 @@ const AuthService = {
     const { email, password } = requestBody;
     let queryObj = `select * from user_account where email = '${email}' and  password = '${password}';`;
     const resultObj = await db.promise(queryObj);
-    if (resultObj == 0) {
+    // db.promise = (sql) => {
+    //   return new Promise((resolve, reject) => {
+    //     db.query(sql, (err, result) => {
+    //       if (err) {
+    //         reject(new Error());
+    //       } else {
+    //         resolve(result);
+    //       }
+    //     });
+    //   });
+    // };
+    
+    if (resultObj.length == 0) {
       throw new BadRequestError('Username or Password is invalid!');
     }
 

@@ -22,6 +22,7 @@ const validateLogin = (httpRequest) => {
 
 const validateRegistration = (httpRequest) => {
   const schema = Joi.object({
+    name:Joi.string().required(),
     email: Joi.string()
     .pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
       // .required()

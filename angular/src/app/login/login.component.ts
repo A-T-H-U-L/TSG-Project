@@ -39,33 +39,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
   }
-
-  // login() {
-  //   if (this.loginForm.valid) {
-     
-  //     this.isLoading = true;
-  //     this.authenticationService
-  //       .login(this.loginForm.value)
-  //       .pipe(
-  //         finalize(() => {
-  //           this.loginForm.markAsPristine();
-  //           this.isLoading = false;
-  //         }),
-  //         untilDestroyed(this)
-  //       )
-  //       .subscribe((data) => {
-  //         log.debug(`${data} successfully logged in`);
-  //         console.log("credentials"+JSON.stringify(data))
-  //       // this._router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
-  //       // this._credentialService.setCredentials(credentials)
-        
-  //         console.log('aaaa1');
-  //       });
-  //   }
-  //   console.log('aaaa');
-  // }
-
   login() {
+
     if (this.loginForm.valid) {
       this.isLoading = true;
       console.log('this.loginForm.valid', this.loginForm.value);
@@ -84,30 +59,11 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+   
+    
   };
 
-  // login() {
-  //   this.isLoading = true;
-  //   const login$ = this.authenticationService.login(this.loginForm.value);
-  //   login$
-  //     .pipe(
-  //       finalize(() => {
-  //         this.loginForm.markAsPristine();
-  //         this.isLoading = false;
-  //       }),
-  //       untilDestroyed(this)
-  //     )
-  //     .subscribe(
-  //       (credentials) => {
-  //         log.debug(`${credentials.username} successfully logged in`);
-  //         this.router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
-  //       },
-  //       (error) => {
-  //         log.debug(`Login error: ${error}`);
-  //         this.error = error;
-  //       }
-  //     );
-  // }
+  
 
   private createForm() {
     this.loginForm = this._formBuilder.group({

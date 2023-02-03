@@ -24,8 +24,7 @@ const AuthController = {
 
   register: async (httpRequest) => {
     console.log('AA')
-    const registerdata = await AuthService.doRegister2(httpRequest.body);
-
+    const registerdata = await AuthService.doRegister(httpRequest.body);
     return {
       statusCode: 200,
       body: {

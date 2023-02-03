@@ -18,19 +18,7 @@ const AuthService = {
   doLogin: async (requestBody) => {
     const { email, password } = requestBody;
     let queryObj = `select * from user_account where email = '${email}' and  password = '${password}';`;
-    const resultObj = await db.promise(queryObj);
-    // db.promise = (sql) => {
-    //   return new Promise((resolve, reject) => {
-    //     db.query(sql, (err, result) => {
-    //       if (err) {
-    //         reject(new Error());
-    //       } else {
-    //         resolve(result);
-    //       }
-    //     });
-    //   });
-    // };
-    
+    const resultObj = await db.promise(queryObj);   
     if (resultObj.length == 0) {
       throw new BadRequestError('Username or Password is invalid!');
     }
@@ -51,27 +39,66 @@ const AuthService = {
   },
 
   doRegister: async (requestBody) => {
-    const { name, email,userTypeId,securityQuesId,ratingId, password} = requestBody;
-    let checkUseremailQuery = `select * from user_account where email = '${email}';`;
-    const checkUseremailResult = await db.promise(checkUseremailQuery);
-    if (checkUseremailResult.length > 0) {
-      throw new BadRequestError('Username already exists!');
-    } else {
-      let insertQuery = `insert into user_account (Name, email, userTypeId,securityQuesId,ratingId,password) values ('${name}','${email}','${userTypeId}','${securityQuesId}','${ratingId},'${password}');`;
-      console.log(insertQuery);
-      await db.promise(insertQuery);
+    const { Name, email, password} = requestBody;
+    // let checkUseremailQuery = `select * from user_account where email = '${email}';`;
+    // const checkUseremailResult = await db.promise(checkUseremailQuery);
+    // console.log("checkUseremailResult"+JSON.stringify(checkUseremailResult));
+    // if (checkUseremailResult.length > 0) {
+    //   throw new BadRequestError('email already exists!');
+    // } else {
+     // let insertQuery = `insert into user_account (Name, email,password) values ('${Name}','${email}','${password}');`;
+      let query2 ="INSERT INTO `user_account` ( `Name`, `email`, `password`) VALUES (, '11hhhhtul.at8@gmail.com', '3434343')"
+      console.log(query2);
 
-      let selectQuery = `select * from user_account where username = '${username}';`;
-      console.log(selectQuery);
-      const selectResult = await db.promise(selectQuery);
-      console.log(selectResult);
+      db.promise(query2)
+      .then((result)=>{console.log("result"+ result);})
 
-      payload = {
-        userId: selectResult[0].uid,
-        role: 'user',
-        username: selectResult[0].username
-      };
-    }
+      // var sql = "SELECT * FROM friends WHERE username='";
+      //  sql = result[0];
+      //  sql = "';"
+      //  return db.promise(sql);
+      //  then((result)=>{ console.log(result);}).
+      //  catch((err)=>{ console.log(err);});
+      // await db.promise(insertQuery);
+
+      // let selectQuery = `select * from user_account where username = '${username}';`;
+      // console.log(selectQuery);
+      // const selectResult = await db.promise(selectQuery);
+      // console.log(selectResult);
+
+      // payload = {
+      //   userId: selectResult[0].uid,
+      //   role: 'user',
+      //   username: selectResult[0].username
+      // };
+    },
+  // }
+
+  doRegister2: async (requestBody) => {
+    const { Name, email, password} = requestBody;
+    console.log("Doregister2")
+    var sql = "SELECT * FROM ?? WHERE ?? = ?";
+    var  sql2='INSERT INTO ?? SET ?'
+var inserts = ['user_account', 'id', requestBody];
+sql = mysql.format(sql, inserts);
+console.log("sql result 0",sql2)
+    // let query2 ="INSERT INTO `user_account` ( `Name`, `email`, `password`) VALUES ('11hhhhtul.at8@gmail.com', '3434343')";
+    // let emailId ="mithunp@gmail.com"
+    // let queryObj3 = `select * from user_account where email = '${emailId}'`;
+    // db.promise(queryObj3)
+      // .then((result) => {
+      //   console.log("first result",JSON.stringify(result))
+      
+      //   let queryObj = `select * from user_account where email = '${emailId}'`;
+      //   return db.promise(queryObj);
+      // })
+      // .then((result) => {
+      //   console.log("second result",JSON.stringify(result));
+
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
   }
 };
 

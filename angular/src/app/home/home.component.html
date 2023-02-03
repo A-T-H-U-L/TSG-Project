@@ -1,10 +1,110 @@
-<div class="container-fluid">
-  <div class="jumbotron text-center">
-    <h1>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
-      <span translate>Hello world !</span>
-    </h1>
-    <app-loader [isLoading]="isLoading"></app-loader>
-    <q [hidden]="isLoading">{{ quote }}</q>
-  </div>
-</div>
+
+     <nav class="navbar navbar-dark bg-dark">
+
+      <div class="container-fluid" col-md-3 >
+  
+        <h4 style="color:#ff6f61 ;">Tax  <B>Management</B></h4>
+       
+  
+  
+  
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+  
+          <div class="offcanvas-header">
+  
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Tax Management</h5>
+  
+           
+  
+          </div>
+  
+          <div class="offcanvas-body">
+  
+            <div class="container-fluid">
+  
+              <div class="row flex-nowrap">
+          
+                  <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark" style="width: 38vh;">
+          
+                      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          
+                        
+          
+                        
+          
+                          <hr>
+          
+                         
+          
+                      </div>
+          
+                  </div>
+          
+                  
+          
+              </div>
+          
+          </div>
+  
+  
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+  </nav>
+  
+  
+  <div class="container-xl">
+      <div class="table-responsive">
+          <div class="table-wrapper">
+              <div class="table-title">
+                  <div class="row">
+                      <div class="col-sm-4"><h2>Employee <b>Details</b></h2></div>
+                      <div class="col-sm-4"></div>
+                    
+                      <div class="col-sm-4">
+                          <div class="search-box">
+                              <i class="material-icons">&#xE8B6;</i>
+                              <form action="">
+                              <input type="text" class="form-control" placeholder="Search&hellip;" >
+                          </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <table class="table table-striped table-hover table-bordered" id="datatable">
+                  <thead>
+                      <tr>
+                          <th>No:</th>
+                          <th>Name </th>
+                          <th>Locality</th>
+                          <th>Experience </th>
+                          <th>Speciality</th>
+                          
+                          
+                      </tr>
+                  </thead>
+                  <tbody>
+                   
+                        
+               
+<!--                          
+                      <tr *ngFor="let item of allDetails | filter:searchText index as i">
+                          <td>{{item.id}}</td>
+                          <td>{{item.fullname}}</td>
+                          <td>{{item.locality}}</td>
+                          <td>{{item.experience}}</td>
+                          <td>{{item.speciality}}</td>
+                       
+                         
+                      </tr> -->
+                  </tbody>
+              </table>
+             
+          </div>
+      </div>  
+  </div> 
+  

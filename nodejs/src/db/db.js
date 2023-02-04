@@ -14,12 +14,12 @@ db.connect((err) => {
   if (err) {
     throw err;
   }
-  console.log('Mysql: Connected');
 });
 db.promise = (sql, fileds) => {
   
+  
     if (fileds) {
-      console.log('sql, fileds'+sql, fileds);
+//
       return new Promise((resolve, reject) => {
       db.query(sql, fileds, (err, result) => {
         console.log('sql, fileds 2'+sql, fileds);
@@ -31,7 +31,7 @@ db.promise = (sql, fileds) => {
       });
     });
     } else {
-      console.log('sql'+sql);
+//
       return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
         if (err) {

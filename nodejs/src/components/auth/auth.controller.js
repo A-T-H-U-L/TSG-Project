@@ -9,9 +9,7 @@ const AuthController = {
    * @returns {Promise.<ControllerResponse> }
    */
   login: async (httpRequest) => {
-    console.log('AA')
     const loginData = await AuthService.doLogin(httpRequest.body);
-
     return {
       statusCode: 200,
       body: {
@@ -23,8 +21,7 @@ const AuthController = {
 
 
   register: async (httpRequest) => {
-    console.log('AA')
-    const registerdata = await AuthService.doRegister(httpRequest.body);
+  const registerdata = await AuthService.doRegister(httpRequest.body);
     return {
       statusCode: 200,
       body: {

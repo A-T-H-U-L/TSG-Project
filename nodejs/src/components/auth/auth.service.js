@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const { User } = require('../../db/models');
 const JwtService = require('./jwt.service');
 const db = require('../../db/db.js');
+const logger = require('../../support/logger');
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 
 const AuthService = {
@@ -40,26 +41,35 @@ const AuthService = {
   doRegister: async (requestBody) => {
     try {
       const { name, email, password } = requestBody;
-    var sql = `INSERT INTO user_account VALUES (?,?,?,?)`;
-    let fileds = [,name, email, password];
-    const resultObj = await db.promise(sql,[,name, email, password])
+      var sqlObj = `INSERT INTO user_account VALUES (?,?,?,?)`;
+      // making db call for inset user in to user_account table with role table inserion 
+      const resultObj = await db.promise(sqlObj,[,name, email, password])
       .then((result) => {
-        console.log('first result1', JSON.stringify(result));
+        // get inserted user id from previous query
         let queryObj = `select userId from user_account where userId = '${result.insertId}'`;
         return db.promise(queryObj);
+      }).then((result) => {
+        // insert useride into rolelist table with user role as static
+        let roleType = 1; // user role type value = 1 and dadmin type = 2
+        let queryObj = `INSERT INTO rolelist VALUES (?,?,?)`;
+        return db.promise(queryObj,[,roleType, result[0].userId]);
       })
       .catch((err) => { 
+        // write error into logger file
         console.log("catch error ",err);
       });
-      console.log("resultObj",resultObj)
+
       if (resultObj.length == 0) {
+        //
+        logger.error("doRegister() Insert failed");
+        //
         throw new BadRequestError('Insert failed');
       }
       return {
         resultObj
       };
     } catch (error) {
-      console.log('doRegister error');
+       logger.error("doRegister()"+error);
     }
     
   }

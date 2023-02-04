@@ -48,7 +48,7 @@ const AuthService = {
         let queryObj = `select userId from user_account where userId = '${result.insertId}'`;
         return db.promise(queryObj);
       })
-      .catch((err) => {
+      .catch((err) => { 
         console.log("catch error ",err);
       });
       console.log("resultObj",resultObj)

@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger, UntilDestroy, untilDestroyed } from '@shared';
-import { AuthenticationService } from '../auth/authentication.service';
+import { AuthenticationService } from '../authentication.service';
 import { CredentialsService } from '@app/auth';
 
 

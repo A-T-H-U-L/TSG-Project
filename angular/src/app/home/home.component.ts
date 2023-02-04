@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-import { QuoteService } from './quote.service';
+import { QuoteService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -18,4 +18,6 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
  
   }
+
+  
 }

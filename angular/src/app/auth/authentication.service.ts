@@ -10,6 +10,13 @@ export interface LoginContext {
   // remember?: boolean;
 }
 
+export interface RegiterContext {
+  name: string;
+  email:string;
+  password: string;
+  // remember?: boolean;
+}
+
 /**
  * Provides a base for authentication workflow.
  * The login/logout methods should be replaced with proper implementation.
@@ -28,6 +35,15 @@ export class AuthenticationService {
 
   login(requestObj: LoginContext): Observable<any> {
     return this.http.post('/auth/login', requestObj, { observe: "response" }).pipe(
+      map((res: HttpResponse<any>) => {
+        return res.body;
+      })
+    );
+  }
+
+
+  register(requestObj: RegiterContext): Observable<any> {
+    return this.http.post('/auth/register', requestObj, { observe: "response" }).pipe(
       map((res: HttpResponse<any>) => {
         return res.body;
       })

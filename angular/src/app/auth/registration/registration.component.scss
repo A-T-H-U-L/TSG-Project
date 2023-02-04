@@ -5,7 +5,7 @@
   justify-content: center;
   min-height: 100vh;
   color: #000;
-  background: url("../../assets/bg3.jpg") center no-repeat;
+  background: url("../../../assets/bg3.jpg") center no-repeat;
   background-size: cover;
 }
 
@@ -42,7 +42,7 @@
 
 .infinity-form .form-input input {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   height: 40px;
   border: 2px solid #fff;
   border-radius: 20px;
@@ -61,6 +61,10 @@
 .infinity-form .form-input input:focus,
 .infinity-form .form-input input:valid {
   border: 2px solid #ff8333;
+}
+
+.infinity-form .form-input input.invalid {
+  border: 2px solid #ff3333;
 }
 
 .infinity-form .form-input input:focus::placeholder {

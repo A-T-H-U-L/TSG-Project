@@ -20,6 +20,7 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 
 
 import { HttpServiceWrapper} from "@shared/http-service/http-service";
+import { RegistrationComponent } from './auth/registration/registration.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -34,6 +35,7 @@ import { HttpServiceWrapper} from "@shared/http-service/http-service";
     HomeModule,
     AboutModule,
     AuthRoutingModule,
+  
 
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],

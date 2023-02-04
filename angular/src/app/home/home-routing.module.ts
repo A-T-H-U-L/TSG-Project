@@ -5,7 +5,7 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { HomeComponent } from './home.component';
 import { Shell } from '@app/shell/shell.service';
 import { AuthenticationGuard } from '@app/auth';
-import { LoginComponent } from '@app/login/login.component';
+
 
 const routes: Routes = [
   Shell.childRoutes([

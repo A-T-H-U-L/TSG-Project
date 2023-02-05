@@ -48,13 +48,16 @@ export class CredentialsService {
    * @param credentials The user credentials.
    * @param remember True to remember credentials across sessions.
    */
+
+  //service to clear the Token from session storage
   clearCredentila(){
     this._credentials = null;
     sessionStorage.removeItem(credentialsKey);
   }
+
+  // function to set the data to session storage
   setCredentials(credentialObj:any) {
     if (credentialObj) {
-      // const storage = remember ? localStorage : sessionStorage;
       this._credentials = credentialObj.data.accessToken;
     sessionStorage.setItem(credentialsKey, JSON.stringify(credentialObj.data.accessToken));
     } else {

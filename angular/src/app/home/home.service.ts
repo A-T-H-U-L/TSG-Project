@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -15,13 +15,22 @@ export interface RandomQuoteContext {
 @Injectable({
   providedIn: 'root',
 })
-export class QuoteService {
+export class TaxProService {
   constructor(private httpClient: HttpClient) {}
 
-  getTaxProList(context: RandomQuoteContext): Observable<string> {
-    return this.httpClient.get(routes.quote(context)).pipe(
-      map((body: any) => body.value),
-      catchError(() => of('Error, could not load joke :-('))
+  // getTaxProList1(): Observable<string> {
+  //   return this.httpClient.get(routes.quote()).pipe(
+  //     map((body: any) => body.value),
+  //     catchError(() => of('Error, could not load joke :-('))
+  //   );
+  // }
+
+  getTaxProList(): Observable<any> {
+    return this.httpClient.get('/taxpro/list', { observe: "response" }).pipe(
+      map((res: HttpResponse<any>) => {
+        return res.body;
+      })
     );
   }
+
 }

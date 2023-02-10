@@ -1,139 +1,20 @@
 
-     <nav class="navbar navbar-dark bg-dark">
+<div class="container" id="home-container">
+    <div class="row">
+            <div class="col-3 card card-box" *ngFor="let item of taxProList">
+              <div class="img-placeholder">
+                <img src="https://images.unsplash.com/photo-1530797195762-6e542a0f1843?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc5MTY2MjE&ixlib=rb-1.2.1&q=80">
+              </div>
+              <div >
+                <h3>{{item.taxProName}}</h3>
+                <p><i class="fa-solid fa-user"></i></p>
+                <p><i class="fa-solid fa-dollar-sign"></i>{{item.ratePerHour}}</p>
+                <p><i class="fa fa-eye " style="cursor: pointer;" (click)="viewDetail(item.taxProId)"></i>View Details</p>
+              </div>
+            </div>
+    </div>
+</div>
 
-      <div class="container-fluid" col-md-3 >
-  
-        <h4 style="color:#ff6f61 ;">Tax  <B>Management</B></h4>
-       
-  
-  
-  
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-  
-          <div class="offcanvas-header">
-  
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Tax Management</h5>
-  
-           
-  
-          </div>
-  
-          <div class="offcanvas-body">
-  
-            <div class="container-fluid">
-  
-              <div class="row flex-nowrap">
-          
-                  <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark" style="width: 38vh;">
-          
-                      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-          
-                        
-          
-                        
-          
-                          <hr>
-          
-                         
-          
-                      </div>
-          
-                  </div>
-          
-                  
-          
-              </div>
-          
-          </div>
-  
-  
-  
-          </div>
-  
-        </div>
-  
-      </div>
-  
-  </nav>
-  
-  
-  <div class="container-xl">
-      <div class="table-responsive">
-          <div class="table-wrapper">
-              <div class="table-title">
-                  <div class="row">
-                      <div class="col-sm-4"><h2>Employee <b>Details</b></h2></div>
-                      <div class="col-sm-4"></div>
-                    
-                      <div class="col-sm-4">
-                          <div class="search-box">
-                              <i class="material-icons">&#xE8B6;</i>
-                              <form action="">
-                              <input type="text" class="form-control" placeholder="Search&hellip;" >
-                          </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <!-- <table class="table table-striped table-hover table-bordered" id="datatable">
-                  
-                  <tbody> -->
-                   
-                        
-               
-                         
-                
-                   
-                    <div class="row py-2">
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="col-12 d-flex flex-column"   *ngFor="let item of taxProList">
-                                    <div class="row bg-faded py-5">
-                                        <div class="col-4 mx-auto">
-                                            <img class="rounded-circle img-fluid bg-info" src="http://robohash.org/EED.png?size=100x100">
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <h3>{{item.taxProName}}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-6 py-3">
-                                            <br>
-                                            <h2> Consultant Type</h2>
-                                            <h3>{{item.consultentType}}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-6 py-3">
-                                            <br>
-                                           <h2>Rate Per Hour</h2> 
-                                            <h3>{{item.ratePerHour}}$</h3>
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutters mt-auto mb-2 justify-content-center">
-                                        <div class="col-4 text-center">
-                                            <i class="fa fa-fw fa-star"></i>
-                                            <br>Rating
-                                            <h4>17</h4>
-                                        </div>
-                                        <div class="col-4 text-center">
-                                            <i class="fa fa-fw fa-heart"></i>
-                                            <br>Likes
-                                            <h4>9</h4>
-                                        </div>
-                                        <div class="col-4 text-center">
-                                            <i class="fa fa-fw fa-file-o"></i>
-                                            <br>Posts
-                                            <h4>45</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                  
-             
-             
-          </div>
-      </div>  
-  </div> 
+ 
+
   

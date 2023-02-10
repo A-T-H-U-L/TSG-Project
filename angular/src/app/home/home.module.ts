@@ -10,4 +10,10 @@ import { HomeComponent } from './home.component';
   imports: [CommonModule, TranslateModule, SharedModule, HomeRoutingModule],
   declarations: [HomeComponent],
 })
-export class HomeModule {}
+export class HomeModule {
+
+
+
+
+  
+}

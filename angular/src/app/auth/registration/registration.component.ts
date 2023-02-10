@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-
+import * as bcrypt from 'bcryptjs';
 import { environment } from '@env/environment';
 import { Logger, UntilDestroy, untilDestroyed } from '@shared';
 import { AuthenticationService } from '../authentication.service';
@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   isLoading: boolean = false;
   registerForm!: FormGroup;
   errText:string ='';
+  hashedPassword: any;
   constructor(
     private _router: Router,
     private _activatedRouter: ActivatedRoute,
@@ -40,12 +41,15 @@ export class RegistrationComponent implements OnInit {
   register() {
 
     if (this.registerForm.valid) {
+   
+const salt = bcrypt.genSaltSync(10);
+const hashedPassword = bcrypt.hashSync(this.registerForm.value.password, salt);
       this.isLoading = true;
       console.log('this.loginForm.valid', this.registerForm.value);
       const requestObj = {
         "name": this.registerForm.value.name,
         "email": this.registerForm.value.email,
-        "password": this.registerForm.value.password
+        "password": hashedPassword
       }
       this.authenticationService.register(requestObj).subscribe(
         (response) => {
@@ -58,7 +62,10 @@ export class RegistrationComponent implements OnInit {
         (error) => {
           this.isLoading = false;
           this.apiErr = true;
-          this.errText = error.error.error.message
+          this.errText = error?.error?.error?.message
+          if(!this.errText){
+            this.errText="Somthing went Wrong"
+          }
           console.log('response', error);
         }
       );

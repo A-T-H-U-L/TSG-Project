@@ -9,7 +9,7 @@ import { AuthenticationGuard } from '@app/auth';
 
 const routes: Routes = [
   Shell.childRoutes([
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+
     { path: 'home', component: HomeComponent, data: { title: marker('Home') },canActivate:[AuthenticationGuard] },
    
   ]),

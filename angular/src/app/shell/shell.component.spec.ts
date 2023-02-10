@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AuthenticationService, CredentialsService } from '@app/auth';
 import { MockAuthenticationService } from '@app/auth/authentication.service.mock';
@@ -17,7 +17,7 @@ describe('ShellComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), I18nModule, NgbModule, RouterTestingModule],
+      imports: [TranslateModule.forRoot(), I18nModule, RouterTestingModule],
       providers: [
         { provide: AuthenticationService, useClass: MockAuthenticationService },
         { provide: CredentialsService, useClass: MockCredentialsService },

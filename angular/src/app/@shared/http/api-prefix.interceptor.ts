@@ -14,7 +14,12 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!/^(http|https):/i.test(request.url)) {
       console.log(environment.serverUrl+request.url);
-      request = request.clone({ url: environment.serverUrl + request.url });
+      const credentialsKey = '_app_cache';
+const key= "Bearer "+ sessionStorage.getItem(credentialsKey)
+      
+      request = request.clone({ url: environment.serverUrl + request.url,setHeaders: {
+        Authorization: key
+      } });
     }
     return next.handle(request);
   }

@@ -2,7 +2,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AuthenticationService, CredentialsService } from '@app/auth';
 import { MockAuthenticationService } from '@app/auth/authentication.service.mock';
@@ -16,7 +16,7 @@ describe('LoginComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [NgbModule, RouterTestingModule, TranslateModule.forRoot(), I18nModule, ReactiveFormsModule],
+      imports: [RouterTestingModule, TranslateModule.forRoot(), I18nModule, ReactiveFormsModule],
       declarations: [LoginComponent],
     }).compileComponents();
   }));

@@ -7,6 +7,7 @@ import { environment } from '@env/environment';
 import { Logger, UntilDestroy, untilDestroyed } from '@shared';
 import { AuthenticationService } from '../authentication.service';
 import { CredentialsService } from '@app/auth';
+import * as bcrypt from 'bcryptjs';
 
 
 const log = new Logger('Login');
@@ -42,15 +43,28 @@ export class LoginComponent implements OnInit {
   login() {
 
     if (this.loginForm.valid) {
+      const salt = bcrypt.genSaltSync(10);
+
+const username:string =this.loginForm.value.email
       this.isLoading = true;
+      const reqBody= {
+        
+        'email':username ,
+        'password': this.loginForm.value.password
+
+    }
       console.log('this.loginForm.valid', this.loginForm.value);
-      this.authenticationService.login(this.loginForm.value).subscribe(
+      this.authenticationService.login(reqBody).subscribe(
         (response) => {
         
           this.isLoading = false;
           console.log('response', response);
           this._credentialService.setCredentials(response)
-          this._router.navigate(['/home']);
+          console.log('UserRole',response.data.userRole)
+          if(response.data.userRole==1){
+          this._router.navigate(['/home']);}else if(response.data.userRole==2){
+            this._router.navigate(['/adminHome'])
+          }
         },
         (error) => {
           this.isLoading = false;

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
+
+
 import { AuthenticationService, CredentialsService } from '@app/auth';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -17,18 +21,23 @@ export class HeaderComponent implements OnInit {
     private credentialsService: CredentialsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+}
 
-  toggleMenu() {
-    this.menuHidden = !this.menuHidden;
+  // toggleMenu() {
+  //   this.menuHidden = !this.menuHidden;
+  // }
+
+  // logout() {
+  //   this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+  // }
+
+  logout(): Observable<boolean> {
+    // Customize credentials invalidation here
+    this.credentialsService.clearCredentila();
+    this.router.navigate(['/login'])
+    return of(true);
   }
 
-  logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
-  }
-
-  get username(): string | null {
-    const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
-  }
 }

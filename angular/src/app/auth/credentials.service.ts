@@ -16,12 +16,12 @@ const credentialsKey = '_app_cache';
   providedIn: 'root',
 })
 export class CredentialsService {
-  private _credentials: Credentials | null = null;
+  private _credentials: any | null = null;
 
   constructor() {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
-      this._credentials = JSON.parse(savedCredentials);
+      this._credentials = savedCredentials;
     }
   }
 
@@ -59,7 +59,8 @@ export class CredentialsService {
   setCredentials(credentialObj:any) {
     if (credentialObj) {
       this._credentials = credentialObj.data.accessToken;
-    sessionStorage.setItem(credentialsKey, JSON.stringify(credentialObj.data.accessToken));
+      
+    sessionStorage.setItem(credentialsKey, credentialObj.data.accessToken);
     } else {
       this._credentials = null;
       sessionStorage.removeItem(credentialsKey);

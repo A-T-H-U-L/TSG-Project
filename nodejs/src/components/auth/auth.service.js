@@ -3,6 +3,7 @@ const { User } = require('../../db/models');
 const JwtService = require('./jwt.service');
 const db = require('../../db/db.js');
 const logger = require('../../support/logger');
+
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 
 const AuthService = {
@@ -16,17 +17,28 @@ const AuthService = {
    */
 
   doLogin: async (requestBody) => {
+    try {
     const { email, password } = requestBody;
-    let queryObj = `select * from user_account where email = '${email}' and  password = '${password}';`;
-    const resultObj = await db.promise(queryObj);
-    if (resultObj.length == 0) {
+    let queryObj1=`SELECT user_account.name, user_account.email, user_account.password, rolelist.roleId
+    FROM user_account
+    LEFT JOIN rolelist 
+    ON user_account.userId = rolelist.userId
+    WHERE user_account.email = '${email}';`
+    // let queryObj = `select * from user_account where email = '${email}'`;
+
+    const resultObj = await db.promise(queryObj1);
+    console.log("daqta ",password, resultObj[0].roleId);
+    const passwordMatch = await bcrypt.compare(password, resultObj[0].password);
+
+    console.log("passwordMatch",passwordMatch)
+   
+    if (resultObj.length == 0 || passwordMatch == false) {
       throw new BadRequestError('Username or Password is invalid!');
     }
 
     payload = {
       userId: resultObj[0].userId,
-      role: 'user',
-      email: resultObj[0].email
+      userRole: resultObj[0].roleId,//user type
     };
 
     const accessToken = await JwtService.generateJWT({
@@ -36,14 +48,22 @@ const AuthService = {
       accessToken,
       ...payload
     };
+  } catch (error) {
+    logger.error("doRegister()"+error);
+ }
+    
   },
 
   doRegister: async (requestBody) => {
     try {
-      const { name, email, password } = requestBody;
-      var sqlObj = `INSERT INTO user_account VALUES (?,?,?,?)`;
+      role_Id=1
+     //let insertQuery = `INSERT INTO tasklist (tasktitle, taskdescription, taskstartdatetime, taskenddatetime, tasktypeid, priorityid, statusid, uid)SELECT '${tasktitle}', '${taskdescription}', '${taskstartdatetime}', '${taskenddatetime}', tasktypeid, priorityid, statusid, uid          FROM tasktype, priority, statusdetails, userdetails          WHERE tasktype.tasktypetitle = '${tasktypetitle}'          AND priority.prioritytype = '${prioritytype}'          AND statusdetails.statustitle = '${statustitle}'          AND userdetails.username = '${username}';`;
+      const { name, email, password} = requestBody;  
+      var sqlObj = `INSERT INTO user_account VALUES (?,?,?,?,?)`;
       // making db call for inset user in to user_account table with role table inserion 
-      const resultObj = await db.promise(sqlObj,[,name, email, password])
+      console.log("pASSWORD",password)
+      const resultObj = await db.promise(sqlObj,[,name, email, password,role_Id])
+     
       .then((result) => {
         // get inserted user id from previous query
         let queryObj = `select userId from user_account where userId = '${result.insertId}'`;

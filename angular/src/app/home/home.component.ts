@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import {  TaxProService } from './home.service';
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   taxProList:any;
 errObj:boolean=false
-  constructor(private _TaxProServic:TaxProService,) {}
+  constructor(private _TaxProServic:TaxProService,private _router:Router) {}
 
   ngOnInit() {
   this.taxPro();
@@ -40,6 +41,17 @@ taxPro(){
 
 
 
+}
+
+
+
+viewDetail(id:any){
+
+  this._router.navigate(['/view/'+id])
+
+
+
+  
 }
   
 }

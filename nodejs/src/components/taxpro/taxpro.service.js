@@ -15,7 +15,7 @@ const TaxProService = {
      * @throws {NotFoundError} When the user is not found.
      */
   
-  
+  //service for listing the taxProfesional
     doTaxprolist: async (httpRequestBody) => {
       try {
         console.log("httpRequestBody",httpRequestBody.taxProId)
@@ -26,7 +26,7 @@ const TaxProService = {
      
         if (resultObj.length == 0) {
           //
-          logger.error("doRegister() Insert failed");
+          logger.error("doTaxprolist() Insert failed");
           //
           throw new BadRequestError('Insert failed');
         }
@@ -72,20 +72,14 @@ const TaxProService = {
     addDetails: async (requestBody) => {
       try {
         const ratingId=1
-        const {taxProName,consultentType,ratePerHour,state,city} = requestBody;
-        let insertQuery = `INSERT INTO taxprofessionaldata (taxProName, consultentType, ratePerHour, stateId, ratingId) SELECT '${taxProName}', '${consultentType}', '${ratePerHour}', stateId, ${ratingId} FROM state WHERE state.stateName = '${state}' AND city.cityName = '${city}';`;
-        // making db call for inset user in to user_account table with role table inserion 
-        const resultObj = await db.promise(sqlObj)
-        .then((result) => {
-          // get inserted user id from previous query
-          let queryObj = `select userId from user_account where userId = '${result.insertId}'`;
-          return db.promise(queryObj);
-        }).then((result) => {
-          // insert useride into rolelist table with user role as static
-          let roleType = 1; // user role type value = 1 and dadmin type = 2
-          let queryObj = `INSERT INTO rolelist VALUES (?,?,?)`;
-          return db.promise(queryObj,[,roleType, result[0].userId]);
-        })
+        console.log("requestBody",requestBody)
+        const {taxProName,consultentType,ratePerHour,state} = requestBody;
+//         let insertQuery = `INSERT INTO taxprofessionaldata (taxProName, consultentType, ratePerHour, stateId) SELECT '${taxProName}', '${consultentType}', '${ratePerHour}', '${stateId}' FROM state WHERE state.stateName = '${state}' AND city.cityName = '${city}';`;
+//  let insertQuery1=`INSERT INTO taxprofessionaldata (taxProName, consultentType, ratePerHour, stateId) SELECT '${taxProName}', '${consultentType}', '${ratePerHour}', stateId ,city_Id FROM state WHERE state.stateName = '${state} AND city.cityName = '${city}';`
+ let insertQuery=`INSERT INTO taxprofessionaldata (taxProName, consultentType, ratePerHour, stateId) SELECT '${taxProName}', '${consultentType}', '${ratePerHour}', stateId  FROM state WHERE state.stateName = '${state}';`    
+        // making db call for inset user in to taxprofessionaldata table with role table inserion 
+        const resultObj = await db.promise(insertQuery)
+   
         .catch((err) => { 
           // write error into logger file
           console.log("catch error ",err);
@@ -93,7 +87,7 @@ const TaxProService = {
   
         if (resultObj.length == 0) {
           //
-          logger.error("doRegister() Insert failed");
+          logger.error("addDetails() Insert failed");
           //
           throw new BadRequestError('Insert failed');
         }
@@ -101,7 +95,7 @@ const TaxProService = {
           resultObj
         };
       } catch (error) {
-         logger.error("doRegister()"+error);
+         logger.error("addDetails()"+error);
       }
       
     }

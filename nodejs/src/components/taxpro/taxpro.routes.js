@@ -13,7 +13,7 @@ const authorization = require('../../middlewares/auth');
 
 module.exports = ({ router, TaxProController, makeExpressCallback }) => {
     router.get('/list',authorization, makeExpressCallback(TaxProController.list));
-    router.get('/view/:id', makeExpressCallback(TaxProController.viewDetails));
-  
+    router.get('/view/:id',authorization, makeExpressCallback(TaxProController.viewDetails));
+    router.get('/add', makeExpressCallback(TaxProController.addTaxPro));
     return router;
   };

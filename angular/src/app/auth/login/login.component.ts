@@ -70,6 +70,7 @@ const username:string =this.loginForm.value.email
           this.isLoading = false;
           this.errTrue = true
           console.log('response', error);
+          log.error('error occured',error)
         }
       );
     }

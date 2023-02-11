@@ -46,16 +46,17 @@ viewDetails: async (httpRequest) => {
 addTaxPro :async (httpRequest) =>{
 
   try {
-    const dataToAdd = await AuthService.TaxProService(httpRequest.body);
+    const dataToAdd = await TaxProService.addDetails(httpRequest.body);
     //response of api call of register function (status code and data)
+    console.log("dataToAdd",dataToAdd)
     return {
       statusCode: 200,
       body: {
-        data: registerdata
+        data: dataToAdd
       }
     };
   } catch (error) {
-    logger.error('register()' + error);
+    logger.error('addTaxPro()' + error);
     throw new BadRequestError(error.message);
   }
 
